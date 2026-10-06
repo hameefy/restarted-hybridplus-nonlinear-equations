@@ -1,0 +1,11 @@
+solver,status,GroupCount,Percent
+dprpplus,max_function_evaluations,211,8.8506711409396
+dprpplus,success,385,16.1493288590604
+gnbfgs,invalid_trial_point,4,0.167785234899329
+gnbfgs,max_function_evaluations,66,2.76845637583893
+gnbfgs,not_run_dimension_cap,298,12.5
+gnbfgs,success,228,9.56375838926174
+hybridplus_cr,max_function_evaluations,48,2.01342281879195
+hybridplus_cr,success,548,22.9865771812081
+restarted_hybridplus,max_function_evaluations,47,1.97147651006711
+restarted_hybridplus,success,549,23.0285234899329

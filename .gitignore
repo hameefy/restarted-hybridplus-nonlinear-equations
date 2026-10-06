@@ -1,0 +1,11 @@
+# MATLAB autosave and editor files
+*.asv
+*.m~
+*.autosave
+slprj/
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+# Local pilot or scratch runs (the published results are in results/)
+results_*/
