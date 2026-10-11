@@ -2,7 +2,7 @@
 
 This repository contains the MATLAB code and the complete benchmark results for the paper
 
-> H. Mohammad and H. Choi, *A restarted diagonal Hestenes–Stiefel/Polak–Ribière–Polyak hybrid method for nonlinear systems of equations* (submitted).
+> H. Mohammad and H. Choi, *A restarted Hestenes–Stiefel/Polak–Ribière–Polyak hybrid method with bounded diagonal scaling for nonlinear systems of equations* (submitted).
 
 It compares four solvers on the same benchmark suite: restarted hybridplus, hybridplus_cr, dprpplus and gnbfgs. Every table and figure of the paper's numerical section is generated from a single raw log, `results/raw_runs.csv`.
 

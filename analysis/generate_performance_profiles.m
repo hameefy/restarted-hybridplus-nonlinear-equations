@@ -14,6 +14,9 @@ function generate_performance_profiles(resultsDir, cfg)
 %     logTauAxis  true (default): logarithmic tau axis with ticks at powers
 %                 of two, labelled in tau; false: linear axis (or log2(tau)
 %                 if log2Scale is true).
+%     legendPlacement  struct with optional fields <subset>_<metric>: a
+%                 legend location string or [x y] (lower-left corner in
+%                 axes-normalised coordinates); default 'best'.
 
 T = load_benchmark_results(fullfile(resultsDir, 'raw_runs.csv'));
 outDir = fullfile(resultsDir, 'profiles');
@@ -64,8 +67,9 @@ for b = 1:numel(subsets)
             title(ax, sprintf('%s: %s (%d cases)', label, subsets(b).description, ...
                 numel(prof.caseIds)), 'Interpreter', 'none', 'FontWeight', 'normal');
         end
-        legend(ax, solverNames, 'Location', 'best', 'Interpreter', 'none', ...
+        lgd = legend(ax, solverNames, 'Location', 'best', 'Interpreter', 'none', ...
             'FontSize', 12);
+        place_legend(ax, lgd, cfg.analysis, sprintf('%s_%s', subsets(b).name, metric));
         base = fullfile(outDir, sprintf('profile_%s_%s', subsets(b).name, metric));
         exportgraphics(fig, [base '.pdf'], 'ContentType', 'vector', 'Padding', 6);
         exportgraphics(fig, [base '.png'], 'Resolution', 200, 'Padding', 6);
@@ -83,6 +87,23 @@ value = default;
 if isfield(s, name) && ~isempty(s.(name))
     value = s.(name);
 end
+end
+
+function place_legend(ax, lgd, analysis, key)
+% Optional per-profile legend placement from analysis.legendPlacement.<key>:
+% a location string (e.g. 'northwest'), or [x y], the lower-left corner of
+% the legend in axes-normalised coordinates.
+placement = get_option(analysis, 'legendPlacement', struct());
+if ~isfield(placement, key), return; end
+where = placement.(key);
+if ischar(where) || isstring(where)
+    lgd.Location = char(where);
+    return;
+end
+lgd.Units = 'normalized'; ax.Units = 'normalized';
+axPos = ax.Position; lgPos = lgd.Position;
+lgd.Position = [axPos(1) + where(1) * axPos(3), axPos(2) + where(2) * axPos(4), ...
+    lgPos(3), lgPos(4)];
 end
 
 function set_log_tau_axis(ax, tauMax)

@@ -92,6 +92,8 @@ cfg.analysis.tauMax = [];          % [] = automatic (largest finite ratio)
 cfg.analysis.log2Scale = false;    % true: plot against log2(tau) (only if logTauAxis is false)
 cfg.analysis.logTauAxis = true;    % logarithmic tau axis, ticks labelled in tau
 cfg.analysis.plotTitles = false;   % no titles; the figures are captioned in the paper
+cfg.analysis.legendPlacement = struct( ...   % per-profile overrides of 'best'
+    'spd_elapsed_seconds', [0.50 0.58]);    % keep clear of the gnbfgs tail
 cfg.analysis.referenceSolver = 'restarted_hybridplus';
 cfg.analysis.historyCases = {'P11_n6500_guess1', 'P05_n6500_guess1'};
 end
